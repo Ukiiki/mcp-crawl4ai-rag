@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: crawl4ai-rag-mcp
+    env: python
+    buildCommand: "pip install uv && uv pip install --system -e . && crawl4ai-setup"
+    startCommand: "python src/crawl4ai_mcp.py"
+    plan: free
+    envVars:
+      - key: TRANSPORT
+        value: sse
+      - key: HOST  
+        value: 0.0.0.0
+      - key: PORT
+        value: 8051
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false  
+      - key: SUPABASE_SERVICE_KEY
+        sync: false
+      - key: MODEL_CHOICE
+        value: gpt-4o-mini
+      - key: USE_HYBRID_SEARCH
+        value: true
+      - key: USE_RERANKING
+        value: true
